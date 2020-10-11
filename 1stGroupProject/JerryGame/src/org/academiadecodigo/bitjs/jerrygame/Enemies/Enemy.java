@@ -26,6 +26,8 @@ public class Enemy {
         this.enemyType = enemyType;
         this.pos = gridPosition;
         this.dead = false;
+        this.health = this.enemyType.getMaxHealth();
+        this.attackDamage = this.enemyType.getAttackDamage();
     }
 
     public boolean isHittingWall() {
@@ -84,7 +86,7 @@ public class Enemy {
 
     public void attack(int attackDamage) {
         //implementation of the attack the enemies should have
-        this.health = (attackDamage > this.health) ? 0 : this.health - attackDamage;
+        this.health = attackDamage > this.health ? 0 : this.health - attackDamage;
 
         if(health <= 0){
             System.out.println(Message.ENEMY_DEATH);
