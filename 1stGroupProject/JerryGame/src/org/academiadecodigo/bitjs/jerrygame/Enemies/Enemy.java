@@ -1,6 +1,7 @@
 package org.academiadecodigo.bitjs.jerrygame.Enemies;
 
 import org.academiadecodigo.bitjs.jerrygame.CollisionDetector;
+import org.academiadecodigo.bitjs.jerrygame.Message;
 import org.academiadecodigo.bitjs.jerrygame.grid.Grid;
 import org.academiadecodigo.bitjs.jerrygame.grid.GridDirection;
 import org.academiadecodigo.bitjs.jerrygame.grid.position.GridPosition;
@@ -18,10 +19,10 @@ public class Enemy {
     protected CollisionDetector collisionDetector;
     protected GridDirection currentDirection;
 
-    public Enemy(int health, int attackDamage, EnemyType enemyType ,GridPosition gridPosition) {
+    public Enemy(EnemyType enemyType, GridPosition gridPosition) {
         //the values received in this constructor are susceptible to change
-        this.health = health;
-        this.attackDamage = attackDamage;
+        //this.health = health;
+        //this.attackDamage = attackDamage;
         this.enemyType = enemyType;
         this.pos = gridPosition;
         this.dead = false;
@@ -81,8 +82,16 @@ public class Enemy {
 
     }*/
 
-    public void attack() {
+    public void attack(int attackDamage) {
         //implementation of the attack the enemies should have
+        this.health = (attackDamage > this.health) ? 0 : this.health - attackDamage;
+
+        if(health <= 0){
+            System.out.println(Message.ENEMY_DEATH);
+            dead = true;
+            return;
+        }
+        System.out.println(Message.REMAINING_HEALTH + health);
     }
 
     public void setGrid(Grid grid) {
