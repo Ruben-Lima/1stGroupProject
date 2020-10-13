@@ -22,7 +22,7 @@ public class Menu extends Room implements KeyboardHandler {
 
 
     public Menu (Game game){
-        super(50, 100);
+        super(100, 50);
         this.game = game;
         started = false;
     }
@@ -30,8 +30,8 @@ public class Menu extends Room implements KeyboardHandler {
     @Override
     public void init(){
         this.setPicture(new Picture(PADDING, PADDING, "resources/Menu_00.png"));
-        this.startText = new Text(collToX(40), rowToY(20), "PRESS SPACE TO START");
-        this.quitText = new Text(collToX(43), rowToY(40), "PRESS Q TO QUIT");
+        this.startText = new Text(collToX(getCols()/2), rowToY(getRows() /4), "PRESS SPACE TO START");
+        this.quitText = new Text(collToX(getCols() /2), rowToY(getRows()  / 3), "PRESS Q TO QUIT");
         getPicture().draw();
         this.keyboard = new Keyboard(this);
         setKeys();

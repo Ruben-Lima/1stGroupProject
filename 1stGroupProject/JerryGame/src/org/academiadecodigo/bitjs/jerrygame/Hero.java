@@ -39,6 +39,7 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
     public Hero(GridPosition gridPosition, Room room) {
         super(room.getCols()/10, room.getRows() / 2, room);
         this.room = room;
+        this.row = room.getRows()/2;
         this.picture0 = new Picture(room.collToX(this.col), room.rowToY(this.row),"resources/Jerry0.png");
         this.picture0 = new Picture(room.collToX(this.col), room.rowToY(this.row), "resources/Jerry1.png");
         this.picture0 = new Picture(room.collToX(this.col), room.rowToY(this.row), "resources/Jerry2.png");
