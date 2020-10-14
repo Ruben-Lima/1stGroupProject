@@ -56,7 +56,7 @@ public interface GridPosition {
      * @param direction the direction to move to
      * @param distance  the number of positions to move
      */
-    public void moveInDirection(GridDirection direction, int distance);
+    public void moveInDirection(GridDirection direction, int distance, int width, int height);
 
     /**
      * Tests equality with another position

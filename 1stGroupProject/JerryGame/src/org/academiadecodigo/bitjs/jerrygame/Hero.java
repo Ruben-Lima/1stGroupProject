@@ -5,6 +5,7 @@ import org.academiadecodigo.bitjs.jerrygame.grid.GridDirection;
 import org.academiadecodigo.bitjs.jerrygame.grid.position.AbstractGridPosition;
 import org.academiadecodigo.bitjs.jerrygame.grid.position.GridPosition;
 import org.academiadecodigo.bitjs.jerrygame.room.Room;
+import org.academiadecodigo.bitjs.jerrygame.room.RoomPosition;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
@@ -21,12 +22,11 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
     private int health;
     private boolean dead;
     private Room room;
+    //maybe create a new property that will count how many time you shoot and after x times it shoots another laser
 
     private GridDirection dir;
-    private Picture picture0;
-    private Picture picture1;
-    private Picture picture2;
     private Picture currentPic;
+    private String[] pictures = new String[3];
 
     private Keyboard keyboard;
     private KeyboardEvent right;
@@ -35,27 +35,27 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
     private KeyboardEvent down;
     private KeyboardEvent j;
 
+    // GridPosition gridPosition, Room room
+    public Hero(Room room) {
+        super(0, 215, room);
 
-    public Hero(GridPosition gridPosition, Room room) {
-        super(room.getCols()/10, room.getRows() / 2, room);
         this.room = room;
-        this.row = room.getRows()/2;
-        this.picture0 = new Picture(room.collToX(this.col), room.rowToY(this.row),"resources/Jerry0.png");
-        this.picture0 = new Picture(room.collToX(this.col), room.rowToY(this.row), "resources/Jerry1.png");
-        this.picture0 = new Picture(room.collToX(this.col), room.rowToY(this.row), "resources/Jerry2.png");
-        this.pos = gridPosition;
+        pictures[0] = "JerryGame/resources/JerryRight.png";
+        pictures[1] = "JerryGame/resources/JerryUp.png";
+        pictures[2] = "JerryGame/resources/JerryDown.png";
+        currentPic = new Picture(room.collToX(getCol()), room.rowToY(getRow()), pictures[0]);
         this.health = 200; //this value is not final so it can and should be changed as we start testing the game
         this.dead = false;
+        dir = GridDirection.RIGHT;
     }
 
     public void init(){
         this.keyboard = new Keyboard(this);
-        this.currentPic = picture0;
         this.currentPic.draw();
         this.setKeys();
     }
 
-    private void attack(int damage){
+    private void shoot(){
 
     }
 
@@ -93,20 +93,6 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
         keyboard.addEventListener(j);
     }
 
-    private void setPictureDirection(KeyboardEvent keyboardEvent) {
-        if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP) {
-            picture2.draw();
-        }
-        if (keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN) {
-            picture1.draw();
-        }
-        if (keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT) {
-            picture0.draw();
-        }
-        if (keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT) {
-            picture0.draw();
-        }
-    }
     public int getHealth() {
         return health;
     }
@@ -123,22 +109,25 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
         return this.pos;
     }
 
+    public void setPos(GridPosition pos) {
+        this.pos = pos;
+    }
+
     public void setGrid(Grid grid) {
         this.grid = grid;
     }
 
-    @Override
-    public void moveInDirection(GridDirection direction, int distance){
-        int initialX = room.collToX(getCol());
-        System.out.println(initialX);
-        int initialY = room.rowToY(getRow());
-        super.moveInDirection(direction, distance);
-        int finalX = room.collToX(super.getCol());
-        System.out.println(finalX);
-        int finalY = room.rowToY(super.getRow());
 
-        currentPic.translate(finalX - initialX, finalY - initialY);
+    public void move(){
+        int initialX = currentPic.getX();
+        int initialY = currentPic.getY();
 
+        super.moveInDirection(dir, 10, currentPic.getWidth(), currentPic.getHeight());
+
+        int differenceX = room.collToX(super.getCol()) - initialX;
+        int differenceY = room.rowToY(super.getRow()) - initialY;
+
+        currentPic.translate(differenceX, differenceY);
     }
 
     private void setGraphicDir(GridDirection dir){
@@ -148,23 +137,43 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_UP){
-            moveInDirection(GridDirection.UP, 1) ;
-            setGraphicDir(GridDirection.UP);
+            dir = GridDirection.UP;
+            currentPic.delete();
+            currentPic = new Picture(currentPic.getX(), currentPic.getY(), pictures[1]);
+            currentPic.draw();
+            move();
+            /*moveInDirection(GridDirection.UP, 1) ;
+            setGraphicDir(GridDirection.UP);*/
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_DOWN){
-            moveInDirection(GridDirection.DOWN, 1) ;
-            setGraphicDir(GridDirection.DOWN);
+            dir = GridDirection.DOWN;
+            currentPic.delete();
+            currentPic = new Picture(currentPic.getX(), currentPic.getY(), pictures[2]);
+            currentPic.draw();
+            move();
+            /*moveInDirection(GridDirection.DOWN, 1) ;
+            setGraphicDir(GridDirection.DOWN);*/
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_RIGHT){
-            moveInDirection(GridDirection.RIGHT, 1) ;
-            setGraphicDir(GridDirection.RIGHT);
+            dir = GridDirection.RIGHT;
+            currentPic.delete();
+            currentPic = new Picture(currentPic.getX(), currentPic.getY(), pictures[0]);
+            currentPic.draw();
+            move();
+            /*moveInDirection(GridDirection.RIGHT, 1) ;
+            setGraphicDir(GridDirection.RIGHT);*/
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_LEFT){
-            moveInDirection(GridDirection.LEFT, 1) ;
-            setGraphicDir(GridDirection.LEFT);
+            dir = GridDirection.LEFT;
+            currentPic.delete();
+            currentPic = new Picture(currentPic.getX(), currentPic.getY(), pictures[0]);
+            currentPic.draw();
+            move();
+            /*moveInDirection(GridDirection.LEFT, 1) ;
+            setGraphicDir(GridDirection.LEFT);*/
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_J){
-            attack(ATTACK_DAMAGE);
+            //attack();
         }
     }
 
@@ -175,12 +184,11 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
 
     @Override
     public void show() {
+
     }
 
     @Override
     public void hide() {
-        this.picture0.delete();
-        this.picture1.delete();
-        this.picture2.delete();
+
     }
 }

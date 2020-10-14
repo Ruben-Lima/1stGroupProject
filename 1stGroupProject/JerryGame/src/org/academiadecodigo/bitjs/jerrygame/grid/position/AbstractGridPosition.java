@@ -52,12 +52,8 @@ public abstract class AbstractGridPosition implements GridPosition {
             return row;
         }
 
-
-        /**
-         * @see GridPosition#moveInDirection(GridDirection, int)
-         */
         @Override
-        public void moveInDirection(GridDirection direction, int distance) {
+        public void moveInDirection(GridDirection direction, int distance, int width, int height) {
 
             switch (direction) {
 
@@ -65,13 +61,13 @@ public abstract class AbstractGridPosition implements GridPosition {
                     moveUp(distance);
                     break;
                 case DOWN:
-                    moveDown(distance);
+                    moveDown(distance, height);
                     break;
                 case LEFT:
                     moveLeft(distance);
                     break;
                 case RIGHT:
-                    moveRight(distance);
+                    moveRight(distance, width);
                     break;
             }
 
@@ -102,9 +98,9 @@ public abstract class AbstractGridPosition implements GridPosition {
          *
          * @param dist the number of positions to move
          */
-        public void moveDown(int dist) {
+        public void moveDown(int dist, int height) {
 
-            int maxRowsDown = dist > getGrid().getRows() - (getRow() + 1) ? getGrid().getRows() - (getRow() + 1) : dist;
+            int maxRowsDown = dist > getGrid().getRows() - (getRow() + height) ? getGrid().getRows() - (getRow() + height) : dist;
             setPos(getCol(), getRow() + maxRowsDown);
 
         }
@@ -126,8 +122,8 @@ public abstract class AbstractGridPosition implements GridPosition {
          *
          * @param dist the number of positions to move
          */
-        public void moveRight(int dist) {
-            int maxRowsRight = dist > getGrid().getCols() - (getCol() + 1) ? getGrid().getCols() - (getCol() + 1) : dist;
+        public void moveRight(int dist, int width) {
+            int maxRowsRight = dist > getGrid().getCols() - (getCol() + width) ? getGrid().getCols() - (getCol() + width) : dist;
             setPos(getCol() + maxRowsRight, getRow());
         }
 

@@ -1,11 +1,11 @@
 package org.academiadecodigo.bitjs.jerrygame.room;
 
+import org.academiadecodigo.bitjs.jerrygame.Game;
 import org.academiadecodigo.bitjs.jerrygame.grid.Grid;
-import org.academiadecodigo.bitjs.jerrygame.grid.GridDirection;
 import org.academiadecodigo.bitjs.jerrygame.grid.position.GridPosition;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public abstract class Room implements Grid, GridPosition {
+public class Room implements Grid {
 
     public static final int PADDING = 10;
     private int cols;
@@ -14,7 +14,8 @@ public abstract class Room implements Grid, GridPosition {
     private int col;
     private int row;
 
-    private Picture picture;
+    protected Game game;
+    protected Picture picture;
 
     public Room(int cols, int rows) {
         this.cols = cols;
@@ -24,27 +25,16 @@ public abstract class Room implements Grid, GridPosition {
 
     @Override
     public void init() {
-        //to initialize new picture here
-        //picture = new Picture();
-        //picture.draw();
+
     }
 
-    @Override
-    public GridPosition makeGridPosition() {
-        return null;
-    }
-
-    @Override
-    public GridPosition makeGridPosition(int col, int row) {
-        return null;
-    }
 
     public int rowToY(int row){
-        return row * getCellSize() + PADDING;
+        return row + PADDING;
     }
 
     public int collToX(int col){
-        return col * getCellSize() + PADDING;
+        return col + PADDING;
     }
 
     @Override
@@ -55,6 +45,16 @@ public abstract class Room implements Grid, GridPosition {
     @Override
     public int getRows() {
         return this.rows;
+    }
+
+    @Override
+    public GridPosition makeGridPosition() {
+        return null;
+    }
+
+    @Override
+    public GridPosition makeGridPosition(int col, int row) {
+        return null;
     }
 
     public Picture getPicture(){
@@ -80,36 +80,6 @@ public abstract class Room implements Grid, GridPosition {
     public  void setPos(int col, int row){
         this.setCol(col);
         this.setRow(row);
-    }
-
-    @Override
-    public int getCol() {
-        return this.col;
-    }
-
-    @Override
-    public int getRow() {
-        return this.row;
-    }
-
-    @Override
-    public void show() {
-        this.picture.draw();
-    }
-
-    @Override
-    public void hide() {
-        this.picture.delete();
-    }
-
-    @Override
-    public void moveInDirection(GridDirection direction, int distance) {
-
-    }
-
-    @Override
-    public boolean equals(GridPosition position) {
-        return false;
     }
 
 }
