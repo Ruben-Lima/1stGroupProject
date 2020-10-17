@@ -1,4 +1,4 @@
-package org.academiadecodigo.bitjs.jerrygame.Enemies;
+package org.academiadecodigo.bitjs.jerrygame.GameObejects.Enemies;
 
 import org.academiadecodigo.bitjs.jerrygame.CollisionDetector;
 import org.academiadecodigo.bitjs.jerrygame.Message;

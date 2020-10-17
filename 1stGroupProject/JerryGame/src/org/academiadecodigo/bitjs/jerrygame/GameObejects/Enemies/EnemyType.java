@@ -1,4 +1,4 @@
-package org.academiadecodigo.bitjs.jerrygame.Enemies;
+package org.academiadecodigo.bitjs.jerrygame.GameObejects.Enemies;
 
 public enum EnemyType {
     //this enum should have something more but i don't know exactly what right now

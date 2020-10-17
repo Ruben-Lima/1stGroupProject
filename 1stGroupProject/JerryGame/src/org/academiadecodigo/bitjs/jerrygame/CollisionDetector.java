@@ -1,6 +1,7 @@
 package org.academiadecodigo.bitjs.jerrygame;
 
-import org.academiadecodigo.bitjs.jerrygame.Enemies.Enemy;
+import org.academiadecodigo.bitjs.jerrygame.GameObejects.Enemies.Enemy;
+import org.academiadecodigo.bitjs.jerrygame.GameObejects.Hero;
 
 public class CollisionDetector {
     private Enemy[] enemies;
