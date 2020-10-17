@@ -8,21 +8,23 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Projectile extends AbstractGridPosition {
     private boolean hit;
+    private boolean shot;
     private Picture currentProjectile;
     private String[] projectiles;
     private Room room;
-    private GridPosition pos;
+    //private GridPosition pos;
     private GridDirection dir;
 
     public Projectile(GridPosition pos, Room room, GridDirection dir) {
         super(Room.PADDING, Room.PADDING, room);
         this.room = room;
         this.dir = dir;
-        this.pos = pos;
+        //this.pos = pos;
         this.projectiles = new String[5];
         this.hit = true;
         addPictures();
         initialisePicture(this.dir);
+        //travel();
     }
 
     private void initialisePicture(GridDirection dir) {
@@ -42,30 +44,14 @@ public class Projectile extends AbstractGridPosition {
     }
 
     public void travel() {
-       // try {
-            hit = false;
-            show();
-            //while (!hit) {
-                //Thread.sleep(30);
-
-                int initialX = currentProjectile.getX();
-                int initialY = currentProjectile.getY();
-
-                moveInDirection(dir, 30, currentProjectile.getWidth(), currentProjectile.getHeight());
-
-                int differenceX = room.collToX(getCol()) - initialX;
-                int differenceY = room.rowToY(getRow()) - initialY;
-
-                currentProjectile.translate(differenceX, differenceY);
-
-                if (room.collToX(getCol()) + currentProjectile.getWidth() == room.collToX(room.getCols())) {
-                    System.out.println("true");
-                    hit = true;
-                }
-            //}
-        //} catch (InterruptedException e) {
-         //   e.printStackTrace();
-        //}
+        hit = false;
+        show();
+        currentProjectile.translate(20, 0);
+        System.out.println(Thread.currentThread());
+        show();
+        if (currentProjectile.getX() + currentProjectile.getWidth() >= room.getCols()) {
+            hit = true;
+        }
     }
 
     @Override
@@ -76,5 +62,17 @@ public class Projectile extends AbstractGridPosition {
     @Override
     public void hide() {
         currentProjectile.delete();
+    }
+
+    public boolean isShot() {
+        return this.shot;
+    }
+
+    public void setShot(boolean shot) {
+        this.shot = shot;
+    }
+
+    public boolean getHit() {
+        return hit;
     }
 }

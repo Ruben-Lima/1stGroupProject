@@ -1,17 +1,26 @@
 package org.academiadecodigo.bitjs.jerrygame.GameObejects.Enemies;
 
 import org.academiadecodigo.bitjs.jerrygame.grid.position.GridPosition;
+import org.academiadecodigo.bitjs.jerrygame.room.Room;
 
-public class Boss extends Enemy {
+public class Boss {
+    private static int attackDamage = 30;
+    private static int health = 200;
+    private static boolean dead = false;
+    private GridPosition pos;
+    private Room room;
 
-    public Boss(GridPosition pos) {
+    public Boss() {
         //the values defined in this constructor are susceptible to change as we start testing
-        super(EnemyType.BOSS, pos);
+
     }
 
-    @Override
-    public void attack(int attackDamage) {
+    public void attack() {
         //implementation of the specific attack the boss should have
-        super.attack(EnemyType.BOSS.getAttackDamage());
+
+    }
+
+    public static boolean isDead() {
+        return dead;
     }
 }

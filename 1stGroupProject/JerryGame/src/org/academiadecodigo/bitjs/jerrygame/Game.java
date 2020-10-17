@@ -1,5 +1,6 @@
 package org.academiadecodigo.bitjs.jerrygame;
 
+import org.academiadecodigo.bitjs.jerrygame.GameObejects.Enemies.Boss;
 import org.academiadecodigo.bitjs.jerrygame.GameObejects.Hero;
 import org.academiadecodigo.bitjs.jerrygame.room.BigBossRoom;
 import org.academiadecodigo.bitjs.jerrygame.room.InitialRoom;
@@ -9,15 +10,16 @@ public class Game {
     private Menu menu;
     private BigBossRoom bossRoom;
     private InitialRoom initialRoom;
+    private Boss[] boss;
     private Hero jerry;
 
-    public Game(){
+    public Game() {
         this.menu = new Menu(this);
         this.bossRoom = new BigBossRoom(this);
         this.jerry = new Hero(menu);
     }
 
-    public void init(){
+    public void init() {
         this.menu.init();
     }
 
@@ -27,6 +29,10 @@ public class Game {
         jerry.setGrid(initialRoom);
         jerry.init();
 
+        while (!jerry.isDead() /*&& Boss.isDead()*/) {
 
+        }
     }
+
+
 }
