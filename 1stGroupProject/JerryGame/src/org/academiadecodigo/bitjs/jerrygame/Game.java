@@ -1,6 +1,7 @@
 package org.academiadecodigo.bitjs.jerrygame;
 
 import org.academiadecodigo.bitjs.jerrygame.GameObejects.Enemies.Boss;
+import org.academiadecodigo.bitjs.jerrygame.GameObejects.Enemies.BossFactory;
 import org.academiadecodigo.bitjs.jerrygame.GameObejects.Hero;
 import org.academiadecodigo.bitjs.jerrygame.room.BigBossRoom;
 import org.academiadecodigo.bitjs.jerrygame.room.InitialRoom;
@@ -40,16 +41,28 @@ public class Game {
 
     public void finalBattle(){
         bossRoom.init();
+        BossFactory.init();
+        boss = new Boss[4];
+        for (int i = 0; i < 4; i++) {
+            BossFactory.spawn(i);
+        }
         jerry.show();
               /*while (!jerry.isDead()) {
             if (jerry.getHasBullet()) {
                 //laserSound.play(true);
                 while (!jerry.getBullet().getHit()) {
+<<<<<<< HEAD
                     delay(5);
                     //System.out.println("shoot");
+=======
+                    delay(4);
+>>>>>>> main
                     jerry.shoot();
                 }
-                //System.out.println("teste");
+                if (jerry.getBullet().getHit()) {
+                    jerry.getBullet().setHit(false);
+                }
+
             }
 
             delay(20);

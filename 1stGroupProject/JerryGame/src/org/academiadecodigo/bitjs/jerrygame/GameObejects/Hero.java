@@ -26,7 +26,7 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
     private boolean hasBullet;
     private boolean toBossFight;
     private Room room;
-    public Projectile bullet;
+    private Projectile bullet;
     //maybe create a new property that will count how many time you shoot and after x times it shoots another laser with more damage
 
     private GridDirection dir;
@@ -61,6 +61,18 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
     }
 
     public void shoot() {
+        if (bullet.getFirstShot() == 0) {
+            hasBullet = true;
+
+            int initialX = bullet.getPicture().getX();
+            int initialY = bullet.getPicture().getY();
+
+            int differenceX = (currentPic.getX() + currentPic.getWidth() *  2 / 3) - initialX;
+            int differenceY = (currentPic.getY() + 8)  - initialY;
+
+            bullet.firstShot(differenceX, differenceY);
+        }
+
         bullet.travel();
         hasBullet = false;
     }
@@ -138,6 +150,10 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
 
     public Projectile getBullet() {
         return bullet;
+    }
+
+    public void setHasBullet(boolean bullet) {
+        this.hasBullet = bullet;
     }
 
     public void setRoom(Room room) {

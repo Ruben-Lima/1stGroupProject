@@ -8,6 +8,7 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Projectile extends AbstractGridPosition {
     private boolean hit;
+    private int firstShot;
     private Picture currentProjectile;
     private String[] projectiles;
     private Room room;
@@ -21,6 +22,7 @@ public class Projectile extends AbstractGridPosition {
         //this.pos = pos;
         this.projectiles = new String[3];
         this.hit = false;
+        firstShot = 0;
         addPictures();
         initialisePicture(this.dir);
     }
@@ -40,11 +42,13 @@ public class Projectile extends AbstractGridPosition {
     }
 
     public void travel() {
+        firstShot = 1;
         hit = false;
         show();
         currentProjectile.translate(10, 0);
         if (currentProjectile.getX() + currentProjectile.getWidth() >= room.getCols()) {
             hide();
+            firstShot = 0;
             hit = true;
         }
     }
@@ -61,5 +65,21 @@ public class Projectile extends AbstractGridPosition {
 
     public boolean getHit() {
         return hit;
+    }
+
+    public Picture getPicture() {
+        return currentProjectile;
+    }
+
+    public int getFirstShot() {
+        return firstShot;
+    }
+
+    public void setHit(boolean hit) {
+        this.hit = hit;
+    }
+
+    public void firstShot(int x, int y) {
+        currentProjectile.translate(x, y);
     }
 }
