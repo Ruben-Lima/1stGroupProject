@@ -10,24 +10,24 @@ public class BossFactory {
     public static Boss spawn(int boss) {
 
 
-        System.out.println("list size" + pos.size());
-        int i = randomNumber(pos.size());
+
+        int i = randomNumber(pos.size() / 2);
         System.out.println(i);
 
         switch (boss){
             case 0:
-                return new Boss(pos.remove(i), BossType.MARI.getPath());
+                return new Boss(pos.remove(i + pos.size()/2),  pos.remove(i), BossType.MARI.getPath());
             case 1:
-                i = randomNumber(pos.size());
+                i = randomNumber(pos.size() / 2);
                 System.out.println(i);
-                return new Boss(pos.remove(i), BossType.JOJO.getPath());
+                return new Boss(pos.remove( i + pos.size()/2), pos.remove(i), BossType.JOJO.getPath());
             case 2:
-                i = randomNumber(pos.size());
+                i = randomNumber(pos.size()/2);
                 System.out.println(i);
-                return new Boss(pos.remove(i), BossType.G.getPath());
+                return new Boss(pos.remove(i + pos.size()/2), pos.remove(i), BossType.G.getPath());
             case 3:
-                i = randomNumber(pos.size());
-                return new Boss(pos.remove(i), BossType.MR9TEEN.getPath());
+                i = randomNumber(pos.size() / 2);
+                return new Boss(pos.remove(i + pos.size()/2), pos.remove(i), BossType.MR9TEEN.getPath());
 
             default:
                 System.out.println("DEU MERDA");
@@ -40,9 +40,17 @@ public class BossFactory {
     }
 
     public static void init(){
-        pos.add(75);
-        pos.add(150);
-        pos.add(250);
-        pos.add(350);
+        pos.add(119);
+        pos.add(192);
+        pos.add(255);
+        pos.add(312);
+
+
+
+        pos.add(887);
+        pos.add(887);
+        pos.add(890);
+        pos.add(870);
+
     }
 }

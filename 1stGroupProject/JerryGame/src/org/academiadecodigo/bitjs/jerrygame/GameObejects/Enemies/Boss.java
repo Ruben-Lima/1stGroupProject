@@ -13,9 +13,9 @@ public class Boss {
     private Room room;
     private Picture picture;
 
-    public Boss(int pos, String path) {
+    public Boss(int x, int y, String path) {
         //the values defined in this constructor are susceptible to change as we start testing
-       this.picture = new Picture(850, pos, path);
+       this.picture = new Picture(x, y, path);
         this.picture.draw();
     }
 

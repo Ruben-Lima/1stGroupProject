@@ -51,12 +51,9 @@ public class Game {
             if (jerry.getHasBullet()) {
                 //laserSound.play(true);
                 while (!jerry.getBullet().getHit()) {
-<<<<<<< HEAD
                     delay(5);
                     //System.out.println("shoot");
-=======
                     delay(4);
->>>>>>> main
                     jerry.shoot();
                 }
                 if (jerry.getBullet().getHit()) {
