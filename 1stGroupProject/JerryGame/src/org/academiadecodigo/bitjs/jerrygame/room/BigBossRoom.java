@@ -10,18 +10,21 @@ public class BigBossRoom extends Room{
     private int col;
     private int row;
     private Sound roomSound;
+    private Picture bossBody;
 
     public BigBossRoom(Game game){
         super(50, 100);
         this.game = game;
         roomSound = new Sound(" JerryGame/resources/Skibidi_boss.wav");
+        bossBody = new Picture(650, 125, "JerryGame/resources/BossBody.png");
     }
 
     @Override
     public void init() {
-        this.setPicture(new Picture(PADDING, PADDING, "resources/Outside_10px_2.png"));
+        this.setPicture(new Picture(PADDING, PADDING, "JerryGame/resources/Outside_10px_2.png"));
         getPicture().draw();
         roomSound.play(true);
+        bossBody.draw();
     }
 
 }

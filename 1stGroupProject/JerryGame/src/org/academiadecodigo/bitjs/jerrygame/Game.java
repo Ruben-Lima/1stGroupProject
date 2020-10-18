@@ -12,11 +12,13 @@ public class Game {
     private InitialRoom initialRoom;
     private Boss[] boss;
     private Hero jerry;
+    private Sound laserSound;
 
     public Game() {
         this.menu = new Menu(this);
         this.bossRoom = new BigBossRoom(this);
         this.jerry = new Hero(menu);
+        this.laserSound = new Sound(" JerryGame/resources/laser.wav");
     }
 
     public void init() {
@@ -28,19 +30,30 @@ public class Game {
         initialRoom.init();
         jerry.setRoom(initialRoom);
         jerry.init();
+        while(!jerry.isToBossFight()){
+            delay(10);
+        }
+        jerry.hide();
+        finalBattle();
 
-        while (!jerry.isDead() /*&& Boss.isDead()*/) {
+    }
+
+    public void finalBattle(){
+        bossRoom.init();
+        jerry.show();
+              /*while (!jerry.isDead()) {
             if (jerry.getHasBullet()) {
+                //laserSound.play(true);
                 while (!jerry.getBullet().getHit()) {
                     delay(5);
-                    System.out.println("shoot");
+                    //System.out.println("shoot");
                     jerry.shoot();
                 }
                 //System.out.println("teste");
             }
 
             delay(20);
-        }
+        }*/
     }
 
     public void delay(int miliseconds){

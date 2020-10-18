@@ -12,6 +12,8 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import java.security.Key;
+
 public class Hero extends AbstractGridPosition implements KeyboardHandler {
     private final int ATTACK_DAMAGE = 60; //this value is susceptible to change as we start testing, but should remain final
 
@@ -22,6 +24,7 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
     private int health;
     private boolean dead;
     private boolean hasBullet;
+    private boolean toBossFight;
     private Room room;
     public Projectile bullet;
     //maybe create a new property that will count how many time you shoot and after x times it shoots another laser with more damage
@@ -36,6 +39,7 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
     private KeyboardEvent up;
     private KeyboardEvent down;
     private KeyboardEvent j;
+    private KeyboardEvent space;
 
     // GridPosition gridPosition, Room room
     public Hero(Room room) {
@@ -84,24 +88,28 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
         up = new KeyboardEvent();
         down = new KeyboardEvent();
         j = new KeyboardEvent();
+        space = new KeyboardEvent();
 
         right.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         left.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         up.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         down.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         j.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        space.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         right.setKey(KeyboardEvent.KEY_D);
         left.setKey(KeyboardEvent.KEY_A);
         up.setKey(KeyboardEvent.KEY_W);
         down.setKey(KeyboardEvent.KEY_S);
         j.setKey(KeyboardEvent.KEY_J);
+        space.setKey(KeyboardEvent.KEY_SPACE);
 
         keyboard.addEventListener(right);
         keyboard.addEventListener(left);
         keyboard.addEventListener(up);
         keyboard.addEventListener(down);
         keyboard.addEventListener(j);
+        keyboard.addEventListener(space);
     }
 
     public int getHealth() {
@@ -182,6 +190,9 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
             hasBullet = true;
             laserSound.play(true);
         }
+        if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE){
+            this.toBossFight = true;
+        }
     }
 
     @Override
@@ -197,5 +208,9 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
     @Override
     public void hide() {
         currentPic.delete();
+    }
+
+    public boolean isToBossFight(){
+        return this.toBossFight;
     }
 }
