@@ -16,7 +16,7 @@ public class BigBossRoom extends Room{
         super(50, 100);
         this.game = game;
         roomSound = new Sound(" JerryGame/resources/Skibidi_boss.wav");
-        bossBody = new Picture(650, 125, "JerryGame/resources/BossBody.png");
+        bossBody = new Picture(650, 100, "JerryGame/resources/Boss1.png");
     }
 
     @Override
