@@ -40,7 +40,7 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
         super(0, 215, room);
 
         this.room = room;
-        currentPic = new Picture(room.collToX(getCol()), room.rowToY(getRow()), "JerryGame/resources/JerryRight.png");
+        currentPic = new Picture(room.collToX(getCol()), room.rowToY(getRow()), "JerryGame/resources/JerryRight_pixel.png");
         this.health = 200; //this value is not final so it can and should be changed as we start testing the game
         this.dead = false;
         dir = GridDirection.RIGHT;
@@ -62,7 +62,7 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
             int initialY = bullet.getPicture().getY();
 
             int differenceX = (currentPic.getX() + currentPic.getWidth() *  2 / 3) - initialX;
-            int differenceY = (currentPic.getY() + 8)  - initialY;
+            int differenceY = (currentPic.getY() + currentPic.getHeight() / 3)  - initialY;
 
             bullet.firstShot(differenceX, differenceY);
         }
@@ -157,7 +157,7 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
     }
 
     public void moveDown() {
-        if (currentPic.getY() - 30 <= 450 - currentPic.getHeight()){
+        if (currentPic.getY() - 30 <= 440 - currentPic.getHeight()){
             currentPic.translate(0, 30);
         }
     }

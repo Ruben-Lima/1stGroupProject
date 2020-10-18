@@ -2,6 +2,7 @@ package org.academiadecodigo.bitjs.jerrygame;
 
 import org.academiadecodigo.bitjs.jerrygame.GameObejects.Enemies.Boss;
 import org.academiadecodigo.bitjs.jerrygame.GameObejects.Enemies.BossFactory;
+import org.academiadecodigo.bitjs.jerrygame.GameObejects.Enemies.BossType;
 import org.academiadecodigo.bitjs.jerrygame.GameObejects.Hero;
 import org.academiadecodigo.bitjs.jerrygame.room.BigBossRoom;
 import org.academiadecodigo.bitjs.jerrygame.room.InitialRoom;
@@ -29,13 +30,14 @@ public class Game {
         initialRoom.init();
         jerry.setRoom(initialRoom);
         jerry.init();
+
         BossFactory.init();
-        boss = new Boss[4];
-        for (int i = 0; i < 4; i++) {
+        boss = new Boss[BossType.values().length];
+        for (int i = 0; i < boss.length; i++) {
             BossFactory.spawn(i);
         }
 
-        while (!jerry.isDead() /*&& Boss.isDead()*/) {
+        while (!jerry.isDead()) {
             if (jerry.getHasBullet()) {
                 while (!jerry.getBullet().getHit()) {
                     delay(4);

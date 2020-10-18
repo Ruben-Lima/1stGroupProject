@@ -12,36 +12,68 @@ import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Menu extends Room implements KeyboardHandler {
     private boolean start;
+    private boolean deleteMenu;
     private Text startText;
     private Text quitText;
     private Keyboard keyboard;
     private KeyboardEvent space;
     private KeyboardEvent q;
+    private Picture[] pictures;
+    private Picture picture2;
+    private Picture picture3;
 
     public Menu(Game game) {
         super(1000, 500);
         this.game = game;
         start = false;
-        picture = new Picture(PADDING, PADDING, "JerryGame/resources/Menu_00.png");
+        deleteMenu = false;
+        pictures = new Picture[3];
+        pictures[0] = new Picture(PADDING, PADDING, "JerryGame/resources/Menu1.jpg");
+        pictures[1] = new Picture(PADDING, PADDING, "JerryGame/resources/Menu2.jpg");
+        pictures[2] = new Picture(PADDING, PADDING, "JerryGame/resources/Menu3.jpg");
     }
 
     @Override
     public void init() {
-        picture.draw();
-        //this.startText = new Text(collToX(picture.getWidth() * 2 / 3), rowToY(picture.getHeight() / 3), "PRESS SPACE TO START");
-        //this.quitText = new Text(collToX(picture.getWidth() * 2 / 3), rowToY(picture.getHeight() / 2), "PRESS Q TO QUIT");
+        pictures[0].draw();
         this.keyboard = new Keyboard(this);
         setKeys();
-        //this.startText.draw();
-        //this.quitText.draw();
         while (!start){
-            game.delay(60);
+            for (int i = 0; i < pictures.length; i++) {
+                game.delay(80);
+                if (i == 0) {
+                    pictures[1].delete();
+                    pictures[2].delete();
+                    pictures[0].draw();
+                    continue;
+                }
+
+                if (i == 1) {
+                    pictures[0].delete();
+                    pictures[2].delete();
+                    pictures[1].draw();
+                    continue;
+                }
+
+                if (i == 2) {
+                    pictures[0].delete();
+                    pictures[1].delete();
+                    pictures[2].draw();
+                    continue;
+                }
+            }
+            game.delay(80);
+            if (deleteMenu) {
+                deleteMenu();
+            }
         }
         this.game.start();
     }
 
     public void deleteMenu() {
-        picture.delete();
+        for (int i = 0; i < pictures.length; i++) {
+            pictures[i].delete();
+        }
     }
 
     private void setKeys() {
@@ -63,10 +95,8 @@ public class Menu extends Room implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent) {
         if (!start) {
             if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
-                deleteMenu();
+                deleteMenu = true;
                 start = true;
-                System.out.println("start");
-
             }
             if (keyboardEvent.getKey() == KeyboardEvent.KEY_Q) {
                 System.exit(0);

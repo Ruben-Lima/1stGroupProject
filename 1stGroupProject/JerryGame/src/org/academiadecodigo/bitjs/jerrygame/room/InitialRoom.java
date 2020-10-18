@@ -8,7 +8,7 @@ public class InitialRoom extends Room{
 
     public InitialRoom(){
         super(1000, 500);
-        picture = new Picture(PADDING, PADDING, "JerryGame/resources/relva_rot_90.png");
+        picture = new Picture(PADDING, PADDING, "JerryGame/resources/relvaNormal.png");
     }
 
     @Override

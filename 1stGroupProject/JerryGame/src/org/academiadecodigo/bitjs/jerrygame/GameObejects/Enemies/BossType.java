@@ -2,10 +2,10 @@ package org.academiadecodigo.bitjs.jerrygame.GameObejects.Enemies;
 
 
 public enum BossType {
-    MARI("JerryGame/resources/Mari.png"),
-    JOJO("JerryGame/resources/Jojo.png"),
-    MR9TEEN("JerryGame/resources/Mr9teen.png"),
-    G("JerryGame/resources/G.png");
+    MARI("JerryGame/resources/Mari_2px.png"),
+    JOJO("JerryGame/resources/Jojo_2px.png"),
+    MR9TEEN("JerryGame/resources/Ricky_2px.png"),
+    G("JerryGame/resources/G_2px.png");
 
     private String path;
 
