@@ -32,11 +32,13 @@ public class Game {
         while (!jerry.isDead() /*&& Boss.isDead()*/) {
             if (jerry.getHasBullet()) {
                 while (!jerry.getBullet().getHit()) {
-                    delay(5);
-                    System.out.println("shoot");
+                    delay(4);
                     jerry.shoot();
                 }
-                //System.out.println("teste");
+                if (jerry.getBullet().getHit()) {
+                    jerry.getBullet().setHit(false);
+                }
+
             }
 
             delay(20);
