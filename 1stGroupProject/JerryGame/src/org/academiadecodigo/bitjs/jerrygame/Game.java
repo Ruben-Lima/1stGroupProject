@@ -27,7 +27,7 @@ public class Game {
     public void start() {
         initialRoom = new InitialRoom();
         initialRoom.init();
-        jerry.setGrid(initialRoom);
+        jerry.setRoom(initialRoom);
         jerry.init();
         BossFactory.init();
         boss = new Boss[4];
@@ -35,10 +35,28 @@ public class Game {
             BossFactory.spawn(i);
         }
 
-        //while (!jerry.isDead() /*&& Boss.isDead()*/) {
+        while (!jerry.isDead() /*&& Boss.isDead()*/) {
+            if (jerry.getHasBullet()) {
+                while (!jerry.getBullet().getHit()) {
+                    delay(4);
+                    jerry.shoot();
+                }
+                if (jerry.getBullet().getHit()) {
+                    jerry.getBullet().setHit(false);
+                }
 
-        //}
+            }
+
+            delay(20);
+        }
     }
 
+    public void delay(int miliseconds){
 
+        try{
+            Thread.sleep(miliseconds);
+        }catch (InterruptedException e){
+            System.out.println(e.getMessage());
+        }
+    }
 }
