@@ -1,5 +1,6 @@
 package org.academiadecodigo.bitjs.jerrygame.GameObejects;
 
+import org.academiadecodigo.bitjs.jerrygame.Sound;
 import org.academiadecodigo.bitjs.jerrygame.grid.Grid;
 import org.academiadecodigo.bitjs.jerrygame.grid.GridDirection;
 import org.academiadecodigo.bitjs.jerrygame.grid.position.AbstractGridPosition;
@@ -27,6 +28,7 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
 
     private GridDirection dir;
     private Picture currentPic;
+    private Sound laserSound;
 
     private Keyboard keyboard;
     private KeyboardEvent right;
@@ -38,7 +40,7 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
     // GridPosition gridPosition, Room room
     public Hero(Room room) {
         super(0, 215, room);
-
+        laserSound = new Sound(" JerryGame/resources/laser.wav");
         this.room = room;
         currentPic = new Picture(room.collToX(getCol()), room.rowToY(getRow()), "JerryGame/resources/JerryRight.png");
         this.health = 200; //this value is not final so it can and should be changed as we start testing the game
@@ -178,6 +180,7 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_J){
             hasBullet = true;
+            laserSound.play(true);
         }
     }
 
