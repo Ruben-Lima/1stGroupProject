@@ -26,13 +26,29 @@ public class Game {
     public void start() {
         initialRoom = new InitialRoom();
         initialRoom.init();
-        jerry.setGrid(initialRoom);
+        jerry.setRoom(initialRoom);
         jerry.init();
 
         while (!jerry.isDead() /*&& Boss.isDead()*/) {
+            if (jerry.getHasBullet()) {
+                while (!jerry.getBullet().getHit()) {
+                    delay(5);
+                    System.out.println("shoot");
+                    jerry.shoot();
+                }
+                //System.out.println("teste");
+            }
 
+            delay(20);
         }
     }
 
+    public void delay(int miliseconds){
 
+        try{
+            Thread.sleep(miliseconds);
+        }catch (InterruptedException e){
+            System.out.println(e.getMessage());
+        }
+    }
 }

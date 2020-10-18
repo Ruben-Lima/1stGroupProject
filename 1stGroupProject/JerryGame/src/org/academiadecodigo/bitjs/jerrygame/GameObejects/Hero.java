@@ -20,13 +20,13 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
     private Grid grid;
     private int health;
     private boolean dead;
+    private boolean hasBullet;
     private Room room;
     public Projectile bullet;
     //maybe create a new property that will count how many time you shoot and after x times it shoots another laser with more damage
 
     private GridDirection dir;
     private Picture currentPic;
-    private String[] pictures = new String[3];
 
     private Keyboard keyboard;
     private KeyboardEvent right;
@@ -40,24 +40,23 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
         super(0, 215, room);
 
         this.room = room;
-        pictures[0] = "JerryGame/resources/JerryRight.png";
-        pictures[1] = "JerryGame/resources/JerryUp.png";
-        pictures[2] = "JerryGame/resources/JerryDown.png";
-        currentPic = new Picture(room.collToX(getCol()), room.rowToY(getRow()), pictures[0]);
+        currentPic = new Picture(room.collToX(getCol()), room.rowToY(getRow()), "JerryGame/resources/JerryRight.png");
         this.health = 200; //this value is not final so it can and should be changed as we start testing the game
         this.dead = false;
         dir = GridDirection.RIGHT;
-        bullet = new Projectile(getPos(), this.room, dir);
+        hasBullet = false;
     }
 
     public void init(){
         this.keyboard = new Keyboard(this);
         show();
         this.setKeys();
+        bullet = new Projectile(this.room, dir);
     }
 
     public void shoot() {
         bullet.travel();
+        hasBullet = false;
     }
 
     public void hit(int damage) {
@@ -115,16 +114,24 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
         return dead;
     }
 
-    public GridPosition getPos() {
+    public boolean getHasBullet() {
+        return hasBullet;
+    }
+
+    /*public GridPosition getPos() {
         return this.pos;
     }
 
     public void setPos(GridPosition pos) {
         this.pos = pos;
+    }*/
+
+    public Projectile getBullet() {
+        return bullet;
     }
 
-    public void setGrid(Grid grid) {
-        this.grid = grid;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public void moveUp() {
@@ -154,35 +161,23 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
     @Override
     public void keyPressed(KeyboardEvent keyboardEvent) {
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_W){
-            dir = GridDirection.UP;
-            hide();
-            currentPic = new Picture(currentPic.getX(), currentPic.getY(), pictures[1]);
             show();
             moveUp();
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_S){
-            dir = GridDirection.DOWN;
-            hide();
-            currentPic = new Picture(currentPic.getX(), currentPic.getY(), pictures[2]);
             show();
             moveDown();
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_D){
-            dir = GridDirection.RIGHT;
-            hide();
-            currentPic = new Picture(currentPic.getX(), currentPic.getY(), pictures[0]);
             show();
             moveRight();
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_A){
-            dir = GridDirection.LEFT;
-            hide();
-            currentPic = new Picture(currentPic.getX(), currentPic.getY(), pictures[0]);
             show();
             moveLeft();
         }
         if (keyboardEvent.getKey() == KeyboardEvent.KEY_J){
-            shoot();
+            hasBullet = true;
         }
     }
 

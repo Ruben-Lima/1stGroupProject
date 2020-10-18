@@ -28,12 +28,20 @@ public class Menu extends Room implements KeyboardHandler {
     @Override
     public void init() {
         picture.draw();
-        this.startText = new Text(collToX(picture.getWidth() * 2 / 3), rowToY(picture.getHeight() / 3), "PRESS SPACE TO START");
-        this.quitText = new Text(collToX(picture.getWidth() * 2 / 3), rowToY(picture.getHeight() / 2), "PRESS Q TO QUIT");
+        //this.startText = new Text(collToX(picture.getWidth() * 2 / 3), rowToY(picture.getHeight() / 3), "PRESS SPACE TO START");
+        //this.quitText = new Text(collToX(picture.getWidth() * 2 / 3), rowToY(picture.getHeight() / 2), "PRESS Q TO QUIT");
         this.keyboard = new Keyboard(this);
         setKeys();
-        this.startText.draw();
-        this.quitText.draw();
+        //this.startText.draw();
+        //this.quitText.draw();
+        while (!start){
+            game.delay(60);
+        }
+        this.game.start();
+    }
+
+    public void deleteMenu() {
+        picture.delete();
     }
 
     private void setKeys() {
@@ -55,11 +63,10 @@ public class Menu extends Room implements KeyboardHandler {
     public void keyPressed(KeyboardEvent keyboardEvent) {
         if (!start) {
             if (keyboardEvent.getKey() == KeyboardEvent.KEY_SPACE) {
-                picture.delete();
-                startText.delete();
-                quitText.delete();
+                deleteMenu();
                 start = true;
-                this.game.start();
+                System.out.println("start");
+
             }
             if (keyboardEvent.getKey() == KeyboardEvent.KEY_Q) {
                 System.exit(0);
