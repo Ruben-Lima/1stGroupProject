@@ -3,7 +3,7 @@ package org.academiadecodigo.bitjs.jerrygame;
 import org.academiadecodigo.bitjs.jerrygame.GameObejects.Hero;
 
 public class CollisionDetector {
-    private Enemy[] enemies;
+    /*private Enemy[] enemies;
     //private Hero hero;
 
     public CollisionDetector(Enemy[] enemies) {
@@ -33,5 +33,5 @@ public class CollisionDetector {
                 //this if will have the implementation to see if an enemy is touching the hero if so should deal damage
             }
         }
-    }
+    }*/
 }

@@ -28,10 +28,14 @@ public class Game {
         initialRoom.init();
         jerry.setGrid(initialRoom);
         jerry.init();
-
-        while (!jerry.isDead() /*&& Boss.isDead()*/) {
-
+        boss = new Boss[4];
+        for (int i = 0; i < 4; i++) {
+            boss[i] = new Boss(i);
         }
+
+        //while (!jerry.isDead() /*&& Boss.isDead()*/) {
+
+        //}
     }
 
 
