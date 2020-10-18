@@ -31,23 +31,13 @@ public class Game {
         initialRoom.init();
         jerry.setRoom(initialRoom);
         jerry.init();
-        while(!jerry.isToBossFight()){
-            delay(10);
-        }
-        jerry.hide();
-        finalBattle();
 
-    }
+        while (!jerry.isDead()) {
+            if (jerry.isToBossFight()){
+                jerry.hide();
+                finalBattle();
 
-    public void finalBattle(){
-        bossRoom.init();
-        BossFactory.init();
-        boss = new Boss[4];
-        for (int i = 0; i < 4; i++) {
-            BossFactory.spawn(i);
-        }
-        jerry.show();
-              /*while (!jerry.isDead()) {
+            }
             if (jerry.getHasBullet()) {
                 //laserSound.play(true);
                 while (!jerry.getBullet().getHit()) {
@@ -63,14 +53,42 @@ public class Game {
             }
 
             delay(20);
-        }*/
+        }
+
     }
 
-    public void delay(int miliseconds){
+    public void finalBattle() {
+        bossRoom.init();
+        BossFactory.init();
+        boss = new Boss[4];
+        for (int i = 0; i < 4; i++) {
+            BossFactory.spawn(i);
+        }
+        jerry.show();
+        while (!jerry.isDead()) {
+            if (jerry.getHasBullet()) {
+                //laserSound.play(true);
+                while (!jerry.getBullet().getHit()) {
+                    delay(5);
+                    //System.out.println("shoot");
+                    delay(4);
+                    jerry.shoot();
+                }
+                if (jerry.getBullet().getHit()) {
+                    jerry.getBullet().setHit(false);
+                }
 
-        try{
+            }
+
+            delay(20);
+        }
+    }
+
+    public void delay(int miliseconds) {
+
+        try {
             Thread.sleep(miliseconds);
-        }catch (InterruptedException e){
+        } catch (InterruptedException e) {
             System.out.println(e.getMessage());
         }
     }

@@ -26,9 +26,9 @@ public class Hero extends AbstractGridPosition implements KeyboardHandler {
     private boolean hasBullet;
     private boolean toBossFight;
     private Room room;
-    private Projectile bullet;
     //maybe create a new property that will count how many time you shoot and after x times it shoots another laser with more damage
 
+    private Projectile bullet;
     private GridDirection dir;
     private Picture currentPic;
     private Sound laserSound;

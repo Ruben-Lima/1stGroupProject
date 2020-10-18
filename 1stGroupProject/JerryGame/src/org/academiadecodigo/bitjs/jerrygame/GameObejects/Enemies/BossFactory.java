@@ -12,7 +12,6 @@ public class BossFactory {
 
 
         int i = randomNumber(pos.size() / 2);
-        System.out.println(i);
 
         switch (boss){
             case 0:
@@ -40,17 +39,17 @@ public class BossFactory {
     }
 
     public static void init(){
-        pos.add(119);
-        pos.add(192);
+        pos.add(123);
+        pos.add(194);
         pos.add(255);
         pos.add(312);
 
 
 
         pos.add(887);
-        pos.add(887);
+        pos.add(891);
         pos.add(890);
-        pos.add(870);
+        pos.add(863);
 
     }
 }
