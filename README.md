@@ -1,4 +1,4 @@
-# 1stGroupProject
+# Free Jerry
 We're doing a game project in 10 nights on Academia de Codigo that will take 14 weeks to finish.	Game about jerry for A/C
 
 Our game is about a rat that wants to "escape" Academia de Codigo but has to fight certain enemies to be able to actually leave.	
